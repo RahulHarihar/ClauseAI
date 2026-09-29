@@ -1,5 +1,4 @@
-import { extractTextFromPDF, extractClauses } from "./services/pdfParser";
-import { analyzeContracts } from "./services/geminiService";
+import { runContractPipeline } from "./services/contractPipeline";
 
 const corsHeaders = {
 	"Access-Control-Allow-Origin": process.env.FRONTEND_URL || "*",
@@ -51,53 +50,32 @@ Bun.serve({
 					const bufferA = Buffer.from(await contractA.arrayBuffer());
 					const bufferB = Buffer.from(await contractB.arrayBuffer());
 
-					// Extract text from PDFs
-					const textA = await extractTextFromPDF(bufferA);
-					const textB = await extractTextFromPDF(bufferB);
-
-					// Extract clauses
-					const clausesA = extractClauses(textA);
-					const clausesB = extractClauses(textB);
-
-					// P2: surface which contract failed with a clear, actionable message
-					if (clausesA.length === 0) {
-						return new Response(
-							JSON.stringify({
-								error:
-									"Could not extract text from Party A contract. The PDF may be scanned or image-based.",
-							}),
-							{ status: 400, headers: corsHeaders },
-						);
-					}
-					if (clausesB.length === 0) {
-						return new Response(
-							JSON.stringify({
-								error:
-									"Could not extract text from Party B contract. The PDF may be scanned or image-based.",
-							}),
-							{ status: 400, headers: corsHeaders },
-						);
-					}
-
-					// Analyze with Gemini
-					const analysis = await analyzeContracts(clausesA, clausesB);
-
-					// P1: guard against malformed JSON from Gemini
-					let result: unknown;
+					let result: Awaited<ReturnType<typeof runContractPipeline>>;
 					try {
-						result = JSON.parse(analysis);
-					} catch {
-						console.error("Gemini returned malformed JSON:", analysis);
-						return new Response(
-							JSON.stringify({
-								error:
-									"The AI returned an unreadable response. Please try again.",
-							}),
-							{ status: 500, headers: corsHeaders },
-						);
+						result = await runContractPipeline(bufferA, bufferB, {
+							mode: "retrieval",
+						});
+					} catch (pipelineError) {
+						const message =
+							pipelineError instanceof Error
+								? pipelineError.message
+								: String(pipelineError);
+						if (message.includes("Could not extract clauses")) {
+							return new Response(
+								JSON.stringify({
+									error:
+										"Could not extract text from one or both contracts. The PDF may be scanned or image-based.",
+								}),
+								{ status: 400, headers: corsHeaders },
+							);
+						}
+						throw pipelineError;
 					}
 
-					return new Response(JSON.stringify(result), {
+					const { clausesA: _a, clausesB: _b, modelUsed: _m, ...payload } =
+						result;
+
+					return new Response(JSON.stringify(payload), {
 						headers: corsHeaders,
 					});
 				} catch (error) {
@@ -130,4 +108,4 @@ Bun.serve({
 	},
 });
 
-console.log(`Contract Negotiator API running on http://localhost:${process.env.PORT || 3000}`);
+console.log(`ClauseAI API running on http://localhost:${process.env.PORT || 3000}`);

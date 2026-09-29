@@ -1,4 +1,4 @@
-# Contract Negotiator
+# ClauseAI (Contract Negotiator)
 
 A lightweight, single-process tool to compare two contract versions, spot conflicting clauses, and generate fair compromise language.
 
@@ -32,9 +32,9 @@ The entire stack runs inside a **single Bun process** — no Express, no Vite, a
 │ Bun Runtime (index.ts)                                      │
 │                                                             │
 │  ├── Serves bundled React UI via native HTML imports        │
-│  ├── Extracts PDF text & splits clauses (services/pdfParser)│
-│  └── Calls Gemini with structured JSON output               │
-│      (services/geminiService)                               │
+│  ├── Extracts PDF text & clause segmentation (clauseSegmenter)│
+│  ├── Retrieves cross-doc clause pairs (retrievalService)    │
+│  └── Calls Gemini in batches (services/geminiService)       │
 └────────────────────────────────┬────────────────────────────┘
                                  │
                                  ▼
@@ -156,6 +156,23 @@ Returns health status:
 ---
 
 ## Verification & Testing
+
+## Known limitations
+
+- **Clause cross-references** (e.g. “as defined in Section 4.2”) are not resolved across chunks; each segment is analyzed on its own text.
+- **Structural parsing** depends on numbered sections, headers, and paragraph boundaries. Unnumbered prose contracts may produce fewer, larger chunks and weaker retrieval pairing.
+- **Eval dataset** is a small set of synthetic pairs (`eval/dataset/`); metrics are for regression tracking, not legal accuracy certification.
+- See [PRIVACY.md](./PRIVACY.md) for data handling and Gemini API terms.
+
+## Evaluation
+
+See [eval/README.md](./eval/README.md). From repo root:
+
+```bash
+bun eval/runner.ts
+```
+
+---
 
 Verify TypeScript compiles cleanly across both packages:
 

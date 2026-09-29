@@ -1,0 +1,25 @@
+{
+  "id": "pair_004",
+  "doc_a_path": "eval/dataset/pair_004/doc_a.pdf",
+  "doc_b_path": "eval/dataset/pair_004/doc_b.pdf",
+  "ground_truth_conflicts": [
+    {
+      "category": "payment_structure",
+      "clause_a_excerpt": "Fixed fee of $10,000 per month, payable Net 15",
+      "clause_b_excerpt": "Time and materials at $250/hour, payable Net 45",
+      "description": "Fixed monthly Net 15 vs T&M Net 45 milestone billing"
+    },
+    {
+      "category": "indemnification",
+      "clause_a_excerpt": "Consultant indemnifies Client for third-party IP",
+      "clause_b_excerpt": "Mutual indemnification limited to gross negligence",
+      "description": "One-way IP indemnity vs mutual limited indemnity"
+    },
+    {
+      "category": "subprocessors",
+      "clause_a_excerpt": "subprocessors without prior approval",
+      "clause_b_excerpt": "prior written consent",
+      "description": "Open subprocessors vs consent required"
+    }
+  ]
+}

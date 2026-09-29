@@ -1,0 +1,4 @@
+timestamp,model,prompt_hash,pipeline_mode,precision,recall,f1,pairs_evaluated,tp,fp,fn
+2026-09-25T15:04:37.561Z,fallback(gemini-3.6-flash>gemini-3.5-flash>gemini-3.5-flash-lite),7af4fd26d027,full_document,0.9412,1.0000,0.9697,5,16,1,0
+2026-09-25T15:06:28.212Z,fallback(gemini-3.6-flash>gemini-3.5-flash>gemini-3.5-flash-lite),7af4fd26d027,full_document,0.9412,1.0000,0.9697,5,16,1,0
+2026-09-29T13:49:46.311Z,fallback(gemini-3.6-flash>gemini-3.5-flash>gemini-3.5-flash-lite),6e26ef571c4a,retrieval,0.1839,1.0000,0.3107,5,16,71,0

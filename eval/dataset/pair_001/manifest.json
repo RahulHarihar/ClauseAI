@@ -1,0 +1,31 @@
+{
+  "id": "pair_001",
+  "doc_a_path": "eval/dataset/pair_001/doc_a.pdf",
+  "doc_b_path": "eval/dataset/pair_001/doc_b.pdf",
+  "ground_truth_conflicts": [
+    {
+      "category": "payment_timeline",
+      "clause_a_excerpt": "paid within thirty (30) days",
+      "clause_b_excerpt": "sixty (60) days of invoice",
+      "description": "Doc A specifies Net 30, Doc B specifies Net 60"
+    },
+    {
+      "category": "liability_cap",
+      "clause_a_excerpt": "not exceed fees paid in the twelve months",
+      "clause_b_excerpt": "two times (2x) fees paid",
+      "description": "Different liability caps (1x vs 2x annual fees)"
+    },
+    {
+      "category": "governing_law",
+      "clause_a_excerpt": "State of Delaware",
+      "clause_b_excerpt": "State of California",
+      "description": "Delaware vs California governing law"
+    },
+    {
+      "category": "confidentiality_period",
+      "clause_a_excerpt": "two (2) years after disclosure",
+      "clause_b_excerpt": "five (5) years from the date",
+      "description": "2-year vs 5-year confidentiality period"
+    }
+  ]
+}

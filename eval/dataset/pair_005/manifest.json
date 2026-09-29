@@ -1,0 +1,25 @@
+{
+  "id": "pair_005",
+  "doc_a_path": "eval/dataset/pair_005/doc_a.pdf",
+  "doc_b_path": "eval/dataset/pair_005/doc_b.pdf",
+  "ground_truth_conflicts": [
+    {
+      "category": "payment_timeline",
+      "clause_a_excerpt": "Net 30 from invoice",
+      "clause_b_excerpt": "Net 60 from invoice",
+      "description": "Net 30 vs Net 60 payment terms"
+    },
+    {
+      "category": "warranty_period",
+      "clause_a_excerpt": "conform to SOW for 90 days",
+      "clause_b_excerpt": "conform to SOW for 30 days",
+      "description": "90-day vs 30-day warranty period"
+    },
+    {
+      "category": "insurance",
+      "clause_a_excerpt": "$1M general liability",
+      "clause_b_excerpt": "$2M general liability and cyber",
+      "description": "Different insurance limits and cyber requirement"
+    }
+  ]
+}

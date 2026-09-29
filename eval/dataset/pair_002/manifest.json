@@ -1,0 +1,25 @@
+{
+  "id": "pair_002",
+  "doc_a_path": "eval/dataset/pair_002/doc_a.pdf",
+  "doc_b_path": "eval/dataset/pair_002/doc_b.pdf",
+  "ground_truth_conflicts": [
+    {
+      "category": "ip_ownership",
+      "clause_a_excerpt": "work-made-for-hire and owned exclusively by Customer",
+      "clause_b_excerpt": "Vendor retains all IP rights",
+      "description": "Work-for-hire ownership vs license with vendor retention"
+    },
+    {
+      "category": "support_sla",
+      "clause_a_excerpt": "8x5 email support with 48-hour",
+      "clause_b_excerpt": "24x7 phone support with 4-hour",
+      "description": "Different support coverage and response times"
+    },
+    {
+      "category": "termination_notice",
+      "clause_a_excerpt": "30 days written notice",
+      "clause_b_excerpt": "90 days notice and payment of early termination",
+      "description": "30-day vs 90-day termination for convenience"
+    }
+  ]
+}

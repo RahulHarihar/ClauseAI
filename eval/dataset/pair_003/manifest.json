@@ -1,0 +1,25 @@
+{
+  "id": "pair_003",
+  "doc_a_path": "eval/dataset/pair_003/doc_a.pdf",
+  "doc_b_path": "eval/dataset/pair_003/doc_b.pdf",
+  "ground_truth_conflicts": [
+    {
+      "category": "confidentiality_scope",
+      "clause_a_excerpt": "all business, technical, and financial data",
+      "clause_b_excerpt": "marked \"Confidential\" in writing",
+      "description": "Broad vs marked-only definition of confidential information"
+    },
+    {
+      "category": "nda_term",
+      "clause_a_excerpt": "three (3) years from the Effective Date",
+      "clause_b_excerpt": "one (1) year after the Effective Date",
+      "description": "3-year vs 1-year NDA term"
+    },
+    {
+      "category": "non_solicitation",
+      "clause_a_excerpt": "not solicit employees for twelve (12) months",
+      "clause_b_excerpt": "No employee non-solicitation obligations",
+      "description": "12-month non-solicit vs none"
+    }
+  ]
+}
